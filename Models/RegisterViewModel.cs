@@ -1,16 +1,17 @@
 using System.ComponentModel.DataAnnotations;
+
 namespace TheWall.Models
 {
     public class RegisterViewModel : BaseEntity
     {
         [Required]
         [MinLength(2)]
-        [Display(Name = "First Name")]
+        [Display(Name = "FirstName")]
         public string FirstName { get; set; }
     
         [Required]
         [MinLength(2)]
-        [Display(Name = "Last Name")]
+        [Display(Name = "LastName")]
         public string LastName { get; set; }
 
         [Required]

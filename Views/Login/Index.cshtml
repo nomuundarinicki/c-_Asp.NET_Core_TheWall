@@ -3,24 +3,26 @@
 }
 @model TheWall.Models.RegisterViewModel
 
-<form action = "Login" method="post">
+<form action="Login" method="post">
     <fieldset>
-        <legend> Login </legend>
+        <h3> Login </h3>
         <p>
+           
             <label for="LogEmail"> Email </label>
-            <input type="text" name ="LogEmail" placeholder="e-mail">
+            <input type="text" name="LogEmail" id="LogEmail"/>
 
         </p>
         <p>
+           
             <label for="LogPassword"> Password </label>
-            <input type="text" name= "LogPassword" placeholder="password">
+            <input type="password" name="LogPassword" id="LogPassword"/>
         </p> 
-        <button> Login </button>
+        <input type="submit" value="Login">
     </fieldset>  
 </form>
-<form>
+<form asp-controller="Login" asp-action="Register" method="post">
     <fieldset>
-        <legend> Register </legend>
+            <h3>Register</h3> 
         <p>
             <span asp-validation-for="FirstName"></span>
             <label asp-for="FirstName"></label>
@@ -46,7 +48,7 @@
             <label asp-for="Confirm"></label>
             <input asp-for="Confirm">
         </p>
-        <button> Register </button>
+        <button type="submit"> Register </button>
     
     </fieldset>    
 </form>    

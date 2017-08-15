@@ -27,10 +27,9 @@ namespace TheWall.Controllers
             {
                 return RedirectToAction("Index", "Messages");
             }
-            else
-            {
+            
                 return View();
-            }
+            
         }
 
         [HttpPost]
@@ -58,12 +57,15 @@ namespace TheWall.Controllers
                 _context.SaveChanges();
                 NewUser = _context.Users.SingleOrDefault(user => user.Email == NewUser.Email);
                 HttpContext.Session.SetInt32("UserId", NewUser.UserId);
+                
+
                 return RedirectToAction("Index", "Messages");
+                
             }
-            else
-            {
+            
+            
                 return View("Index", model);
-            }
+            
         }
 
         [HttpPost]
@@ -76,12 +78,11 @@ namespace TheWall.Controllers
                 ViewBag.Message = "Login failed.";
                 return View("Index");
             }
-            else
-            {
+        
                 HttpContext.Session.SetInt32("UserId", FoundUser.UserId);
                 return RedirectToAction("Index", "Messages");
             }
-        }
+        
 
         [HttpGet]
         [Route("Logoff")]
