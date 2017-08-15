@@ -1,3 +1,37 @@
 @{
-    View
+    ViewData["Title"] = "Messages";
 }
+
+@model thewall.Models.Message
+
+<h2>Welcome, @ViewBag.LoggedUser.FirstName!</h2>
+<p><a asp-controller="Login" asp-action="Logoff">log off</a></p>
+
+<form asp-controller="Messages" asp-action="PostMessage" method="post">
+  <fieldset>
+    <legend>Post a message</legend>
+    <textarea asp-for="MessageText"></textarea>
+    <button>Post a message</button>
+  </fieldset>
+</form>
+
+<div>
+@foreach (var message in @ViewBag.AllMessages)
+{
+    <dt>@message.User.FirstName @message.User.LastName - @message.CreatedAt.ToString("MMMM d yyyy")</dt>
+    <dd>@message.MessageText</dd>
+    @foreach (var comment in message.Comments)
+    {
+      <h5>@comment.User.FirstName @comment.User.LastName - @comment.CreatedAt.ToString("MMM d yyyy")</h5>
+      <h6>@comment.CommentText</h6>
+    }
+    <form asp-controller="Messages" asp-action="PostComment" method="post">
+      <fieldset>
+        <legend>Post a comment</legend>
+        <textarea name="CommentText"></textarea>
+        <input type="hidden" name="MessageId" value="@message.MessageId"/>
+        <button>Post a comment</button>
+      </fieldset>
+    </form>
+}
+</div>
